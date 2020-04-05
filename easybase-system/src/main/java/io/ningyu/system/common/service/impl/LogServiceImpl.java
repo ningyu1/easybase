@@ -2,8 +2,8 @@ package io.ningyu.system.common.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.ningyu.system.common.vo.LogInfo;
-import io.ningyu.system.common.vo.QueryLog;
+import io.ningyu.system.common.dto.LogInfo;
+import io.ningyu.system.common.dto.QueryLog;
 import io.ningyu.system.common.entity.Log;
 import io.ningyu.system.common.mapper.LogMapper;
 import io.ningyu.system.common.service.ILogService;

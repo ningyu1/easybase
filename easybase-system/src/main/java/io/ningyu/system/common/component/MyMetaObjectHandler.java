@@ -27,6 +27,14 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
                 setFieldValByName("creator", userObj.getInteger("id"), metaObject);
             }
         }
+        Object createUser = getFieldValByName("createUser", metaObject);
+        if (null == createUser && null != SecurityUtils.getSubject()) {
+            String principal = (String) SecurityUtils.getSubject().getPrincipal();
+            if (!StringUtils.isEmpty(principal)) {
+                JSONObject userObj = JSON.parseObject(principal);
+                setFieldValByName("createUser", userObj.getInteger("id"), metaObject);
+            }
+        }
         Object createTime = getFieldValByName("createTime", metaObject);
         if (null == createTime) {
             setFieldValByName("createTime", LocalDateTime.now(), metaObject);
@@ -41,6 +49,14 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
             if (!StringUtils.isEmpty(principal)) {
                 JSONObject userObj = JSON.parseObject(principal);
                 setFieldValByName("operator", userObj.getInteger("id"), metaObject);
+            }
+        }
+        Object updateUser = getFieldValByName("updateUser", metaObject);
+        if (null == updateUser && null != SecurityUtils.getSubject()) {
+            String principal = (String) SecurityUtils.getSubject().getPrincipal();
+            if (!StringUtils.isEmpty(principal)) {
+                JSONObject userObj = JSON.parseObject(principal);
+                setFieldValByName("updateUser", userObj.getInteger("id"), metaObject);
             }
         }
         Object updateTime = getFieldValByName("updateTime", metaObject);

@@ -1,5 +1,5 @@
 
-package io.ningyu.system.security.vo;
+package io.ningyu.system.security.dto;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;

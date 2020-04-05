@@ -24,7 +24,7 @@
     </sql>
     
     <!-- 使用存储过程查询树，推荐使用 -->
-    <select id="queryDictTreeProc" parameterType="java.lang.Integer" resultType="io.ningyu.system.common.vo.DictInfo" statementType="CALLABLE">
+    <select id="queryDictTreeProc" parameterType="java.lang.Integer" resultType="io.ningyu.system.common.dto.DictInfo" statementType="CALLABLE">
         CALL queryDictList(#{parentId,mode=IN})
     </select>
 

@@ -1,6 +1,7 @@
 package io.ningyu.system.warehouse.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.ningyu.system.warehouse.dto.QueryWarehouse;
 import io.ningyu.system.warehouse.entity.WarehouseEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -14,6 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWarehouseService extends IService<WarehouseEntity> {
 
-    Page<WarehouseEntity> selectList(Page<WarehouseEntity> page, WarehouseEntity entity);
+    Page<WarehouseEntity> selectList(Page<WarehouseEntity> page, QueryWarehouse warehouse);
 
 }

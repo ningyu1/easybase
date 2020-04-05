@@ -6,7 +6,7 @@ import io.ningyu.common.annotation.auth.CurrentUser;
 import io.ningyu.common.annotation.log.AroundLog;
 import io.ningyu.common.base.PageResult;
 import io.ningyu.common.base.Result;
-import io.ningyu.system.security.vo.*;
+import io.ningyu.system.security.dto.*;
 import io.ningyu.system.security.entity.User;
 import io.ningyu.system.security.service.IDataPermissionService;
 import io.ningyu.system.security.service.IUserService;

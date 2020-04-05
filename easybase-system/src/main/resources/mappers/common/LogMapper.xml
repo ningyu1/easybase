@@ -24,7 +24,7 @@
     </sql>
 
     <!-- 分页查询操作日志 -->
-    <select id="selectLogList" resultType="io.ningyu.system.common.vo.LogInfo" parameterType="io.ningyu.system.common.vo.QueryLog">
+    <select id="selectLogList" resultType="io.ningyu.system.common.dto.LogInfo" parameterType="io.ningyu.system.common.dto.QueryLog">
         SELECT DISTINCT
         A.id,
         A.method_name,

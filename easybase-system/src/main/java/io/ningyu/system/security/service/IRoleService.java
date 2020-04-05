@@ -2,8 +2,8 @@ package io.ningyu.system.security.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.ningyu.system.security.vo.CreateRole;
-import io.ningyu.system.security.vo.UpdateRole;
+import io.ningyu.system.security.dto.CreateRole;
+import io.ningyu.system.security.dto.UpdateRole;
 import io.ningyu.system.security.entity.Role;
 
 /**

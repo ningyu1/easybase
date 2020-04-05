@@ -1,4 +1,4 @@
-package io.ningyu.system.common.vo;
+package io.ningyu.system.common.dto;
 
 import java.io.Serializable;
 

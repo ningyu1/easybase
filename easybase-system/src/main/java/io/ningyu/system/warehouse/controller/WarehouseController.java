@@ -9,7 +9,7 @@ import io.ningyu.common.base.PageResult;
 import io.ningyu.common.base.Result;
 import io.ningyu.system.warehouse.entity.WarehouseEntity;
 import io.ningyu.system.warehouse.service.IWarehouseService;
-import io.ningyu.system.warehouse.vo.WarehouseVO;
+import io.ningyu.system.warehouse.dto.QueryWarehouse;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-04-04
  */
 @RestController
-@RequestMapping("/warehouse/warehouse")
+@RequestMapping("/warehouse")
 public class WarehouseController {
 
     @Autowired
@@ -44,15 +44,15 @@ public class WarehouseController {
     @RequiresRoles("SYSADMIN")
     @ApiOperation(value = "添加仓库")
     @AroundLog(name = "添加仓库")
-    public Result<WarehouseVO> create(@RequestBody WarehouseVO vo) {
+    public Result<QueryWarehouse> create(@RequestBody QueryWarehouse vo) {
         WarehouseEntity entity = new WarehouseEntity();
-        BeanCopier.create(WarehouseVO.class, WarehouseEntity.class, false).copy(vo, entity, null);
+        BeanCopier.create(QueryWarehouse.class, WarehouseEntity.class, false).copy(vo, entity, null);
         boolean result = warehouseService.save(entity);
         if (result) {
             vo.setId(entity.getId());
-            return new Result<WarehouseVO>().success("添加成功").put(vo);
+            return new Result<QueryWarehouse>().success("添加成功").put(vo);
         } else {
-            return new Result<WarehouseVO>().error("添加失败，请重试");
+            return new Result<QueryWarehouse>().error("添加失败，请重试");
         }
     }
 
@@ -63,14 +63,14 @@ public class WarehouseController {
     @RequiresRoles("SYSADMIN")
     @ApiOperation(value = "更新仓库")
     @AroundLog(name = "更新仓库")
-    public Result<WarehouseVO> update(@RequestBody WarehouseVO vo) {
+    public Result<QueryWarehouse> update(@RequestBody QueryWarehouse vo) {
         WarehouseEntity entity = new WarehouseEntity();
-        BeanCopier.create(WarehouseVO.class, WarehouseEntity.class, false).copy(vo, entity, null);
+        BeanCopier.create(QueryWarehouse.class, WarehouseEntity.class, false).copy(vo, entity, null);
         boolean result = warehouseService.updateById(entity);
         if (result) {
-            return new Result<WarehouseVO>().success("修改成功").put(vo);
+            return new Result<QueryWarehouse>().success("修改成功").put(vo);
         } else {
-            return new Result<WarehouseVO>().error("修改失败");
+            return new Result<QueryWarehouse>().error("修改失败");
         }
     }
 
@@ -103,27 +103,27 @@ public class WarehouseController {
     @NoAuthentication
     @ApiOperation(value = "查询仓库", notes = "查询仓库")
     @ApiImplicitParam(paramType = "query", name = "id", value = "仓库id", required = true, dataType = "Integer")
-    public Result<WarehouseVO> queryDictList(@PathVariable("id") Integer id) {
+    public Result<QueryWarehouse> queryDictList(@PathVariable("id") Integer id) {
         WarehouseEntity entity = warehouseService.getById(id);
-        WarehouseVO vo = new WarehouseVO();
+        QueryWarehouse vo = new QueryWarehouse();
         if (entity != null) {
-            BeanCopier.create(WarehouseEntity.class, WarehouseVO.class, false).copy(entity, vo, null);
+            BeanCopier.create(WarehouseEntity.class, QueryWarehouse.class, false).copy(entity, vo, null);
         }
-        return new Result<WarehouseVO>().success().put(vo);
+        return new Result<QueryWarehouse>().success().put(vo);
     }
 
     /**
      * 查询仓库列表
      *
-     * @param entity
+     * @param vo
      * @param page
      * @return
      */
-    @PostMapping(value = "/list")
+    @GetMapping(value = "/list")
     @NoAuthentication
     @ApiOperation(value = "查询仓库列表", notes = "查询仓库列表")
-    public PageResult<WarehouseEntity> list(WarehouseEntity entity, Page<WarehouseEntity> page) {
-        Page<WarehouseEntity> pageList = warehouseService.selectList(page, entity);
+    public PageResult<WarehouseEntity> list(QueryWarehouse vo, Page<WarehouseEntity> page) {
+        Page<WarehouseEntity> pageList = warehouseService.selectList(page, vo);
         PageResult<WarehouseEntity> pageResult = new PageResult<WarehouseEntity>(pageList.getTotal(), pageList.getRecords());
         return pageResult;
     }

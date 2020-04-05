@@ -32,7 +32,7 @@
     </sql>
     
     <!-- 分页查询用户列表 -->
-	<select id="selectUserList" resultType="io.ningyu.system.security.vo.UserInfo" parameterType="io.ningyu.system.security.entity.User">
+	<select id="selectUserList" resultType="io.ningyu.system.security.dto.UserInfo" parameterType="io.ningyu.system.security.entity.User">
 		SELECT DISTINCT
 		A.id AS id,
 		A.user_account AS userAccount,

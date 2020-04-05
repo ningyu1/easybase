@@ -2,7 +2,7 @@ package io.ningyu.system.security.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.ningyu.system.security.vo.UpdateDataPermission;
+import io.ningyu.system.security.dto.UpdateDataPermission;
 import io.ningyu.system.security.entity.DataPermission;
 import io.ningyu.system.security.mapper.DataPermissionMapper;
 import io.ningyu.system.security.service.IDataPermissionService;

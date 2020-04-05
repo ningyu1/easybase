@@ -2,14 +2,12 @@ package io.ningyu.system.common.controller;
 
 import io.ningyu.common.annotation.auth.NoAuthentication;
 import io.ningyu.common.base.Result;
-import io.ningyu.system.common.vo.WeiXinJsUrl;
+import io.ningyu.system.common.dto.WeiXinJsUrl;
 import io.ningyu.system.common.service.IWechatApiService;
 import io.ningyu.system.common.util.WeiXinSign;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Map;

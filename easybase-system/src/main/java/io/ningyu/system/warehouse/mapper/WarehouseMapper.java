@@ -3,6 +3,7 @@ package io.ningyu.system.warehouse.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.ningyu.system.warehouse.entity.WarehouseEntity;
+import io.ningyu.system.warehouse.dto.QueryWarehouse;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -15,6 +16,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface WarehouseMapper extends BaseMapper<WarehouseEntity> {
 
-    Page<WarehouseEntity> selectList(Page<WarehouseEntity> page, @Param("warehouse") WarehouseEntity entity);
+    Page<WarehouseEntity> selectList(Page<WarehouseEntity> page, @Param("warehouse") QueryWarehouse warehouse);
 
 }

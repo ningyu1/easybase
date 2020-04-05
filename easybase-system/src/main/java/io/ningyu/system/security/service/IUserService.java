@@ -2,10 +2,10 @@ package io.ningyu.system.security.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.ningyu.system.security.vo.CreateUser;
-import io.ningyu.system.security.vo.QueryUser;
-import io.ningyu.system.security.vo.UpdateUser;
-import io.ningyu.system.security.vo.UserInfo;
+import io.ningyu.system.security.dto.CreateUser;
+import io.ningyu.system.security.dto.QueryUser;
+import io.ningyu.system.security.dto.UpdateUser;
+import io.ningyu.system.security.dto.UserInfo;
 import io.ningyu.system.security.entity.User;
 
 /**

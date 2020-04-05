@@ -23,7 +23,7 @@
 
     <!-- 分页查询角色列表 -->
     <select id="selectList" resultType="io.ningyu.system.warehouse.entity.WarehouseEntity"
-            parameterType="io.ningyu.system.warehouse.entity.WarehouseEntity">
+            parameterType="io.ningyu.system.warehouse.dto.QueryWarehouse">
         SELECT
         <include refid="Base_Column_List"/>
         FROM t_sys_warehouse
@@ -39,6 +39,12 @@
         </if>
         <if test="warehouse.status != null and warehouse.status != ''">
             AND status = #{warehouse.status}
+        </if>
+        <if test="warehouse.startDate != null and warehouse.startDate != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{warehouse.startDate},'%Y-%m-%d')
+        </if>
+        <if test="warehouse.endDate != null and warehouse.endDate != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{warehouse.endDate},'%Y-%m-%d')
         </if>
         ORDER BY id DESC
     </select>

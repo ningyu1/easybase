@@ -1,5 +1,5 @@
 
-package io.ningyu.system.security.vo;
+package io.ningyu.system.security.dto;
 
 import java.util.Date;
 
@@ -9,9 +9,8 @@ import java.util.Date;
  * </p>
  *
  */
-public class CreateRole
+public class UpdateRole
 {
-
     private Integer id;
     
     private Integer parentId;
@@ -92,7 +91,7 @@ public class CreateRole
 		this.roleStatus = roleStatus;
 	}
 
-	public String getDescription()
+    public String getDescription()
     {
         return description;
     }

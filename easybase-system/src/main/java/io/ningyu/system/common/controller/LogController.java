@@ -3,8 +3,8 @@ package io.ningyu.system.common.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.ningyu.common.base.PageResult;
-import io.ningyu.system.common.vo.LogInfo;
-import io.ningyu.system.common.vo.QueryLog;
+import io.ningyu.system.common.dto.LogInfo;
+import io.ningyu.system.common.dto.QueryLog;
 import io.ningyu.system.common.service.ILogService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresRoles;

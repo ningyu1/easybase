@@ -2,8 +2,8 @@ package io.ningyu.system.security.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.ningyu.system.security.vo.QueryUser;
-import io.ningyu.system.security.vo.UserInfo;
+import io.ningyu.system.security.dto.QueryUser;
+import io.ningyu.system.security.dto.UserInfo;
 import io.ningyu.system.security.entity.User;
 import org.apache.ibatis.annotations.Param;
 

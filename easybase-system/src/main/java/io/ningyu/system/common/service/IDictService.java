@@ -1,7 +1,7 @@
 package io.ningyu.system.common.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.ningyu.system.common.vo.DictInfo;
+import io.ningyu.system.common.dto.DictInfo;
 import io.ningyu.system.common.entity.Dict;
 
 import java.util.List;

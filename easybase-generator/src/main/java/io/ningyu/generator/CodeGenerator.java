@@ -139,7 +139,7 @@ public class CodeGenerator {
         strategy.setNaming(NamingStrategy.underline_to_camel);
         // strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         // strategy.setSuperEntityClass("com.baomidou.ant.common.BaseEntity");
-        strategy.setEntityLombokModel(true);
+        strategy.setEntityLombokModel(false);
         strategy.setRestControllerStyle(true);
         // strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");
         strategy.setInclude(tables);// 表名

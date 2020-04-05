@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.ningyu.common.base.BusinessException;
 import io.ningyu.common.base.Constant;
-import io.ningyu.system.common.vo.DictInfo;
+import io.ningyu.system.common.dto.DictInfo;
 import io.ningyu.system.common.entity.Dict;
 import io.ningyu.system.common.mapper.DictMapper;
 import io.ningyu.system.common.service.IDictService;

@@ -2,8 +2,8 @@ package io.ningyu.system.common.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.ningyu.system.common.vo.LogInfo;
-import io.ningyu.system.common.vo.QueryLog;
+import io.ningyu.system.common.dto.LogInfo;
+import io.ningyu.system.common.dto.QueryLog;
 import io.ningyu.system.common.entity.Log;
 import org.apache.ibatis.annotations.Param;
 

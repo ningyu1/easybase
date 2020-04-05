@@ -1,7 +1,7 @@
 package io.ningyu.system.security.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.ningyu.system.security.vo.UpdateRoleResource;
+import io.ningyu.system.security.dto.UpdateRoleResource;
 import io.ningyu.system.security.entity.Resource;
 import io.ningyu.system.security.entity.RoleResource;
 

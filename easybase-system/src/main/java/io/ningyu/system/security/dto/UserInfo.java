@@ -1,5 +1,5 @@
 
-package io.ningyu.system.security.vo;
+package io.ningyu.system.security.dto;
 
 import io.ningyu.system.security.entity.Resource;
 

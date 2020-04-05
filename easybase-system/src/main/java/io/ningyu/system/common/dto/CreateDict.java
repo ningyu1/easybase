@@ -1,4 +1,4 @@
-package io.ningyu.system.common.vo;
+package io.ningyu.system.common.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,12 +12,9 @@ import java.io.Serializable;
  *
  */
 @ApiModel(value="Dict对象", description="数据字典")
-public class UpdateDict implements Serializable {
+public class CreateDict implements Serializable {
 
-    private static final long serialVersionUID = 2154482874274306219L;
-
-    @ApiModelProperty(value = "主键id")
-    private Integer id;
+    private static final long serialVersionUID = 6042491862249888316L;
 
     @ApiModelProperty(value = "字典类型")
     private Integer parentId;
@@ -37,19 +34,14 @@ public class UpdateDict implements Serializable {
     @ApiModelProperty(value = "描述信息")
     private String description;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
     public Integer getParentId() {
         return parentId;
     }
 
-    
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+   
     
     public String getDictName() {
         return dictName;
@@ -90,11 +82,6 @@ public class UpdateDict implements Serializable {
         this.dictStatus = dictStatus;
     }
 
-    
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -106,7 +93,6 @@ public class UpdateDict implements Serializable {
     @Override
     public String toString() {
         return "Dict{" +
-        " id=" + id +
         ", parentId=" + parentId +
         ", dictName=" + dictName +
         ", dictCode=" + dictCode +

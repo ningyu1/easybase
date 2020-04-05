@@ -2,7 +2,7 @@ package io.ningyu.system.security.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.ningyu.system.security.vo.UpdateRoleResource;
+import io.ningyu.system.security.dto.UpdateRoleResource;
 import io.ningyu.system.security.entity.Resource;
 import io.ningyu.system.security.entity.RoleResource;
 import io.ningyu.system.security.mapper.RoleResourceMapper;
