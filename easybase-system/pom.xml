@@ -11,7 +11,7 @@
     <groupId>com.easybase</groupId>
     <artifactId>easybase-system</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1</version>
+    <version>${project.parent.version}</version>
     <name>easybase-system</name>
     <url>http://maven.apache.org</url>
 
@@ -23,7 +23,12 @@
         <dependency>
             <groupId>com.easybase</groupId>
             <artifactId>easybase-common</artifactId>
-            <version>0.0.1</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.easybase</groupId>
+            <artifactId>easybase-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

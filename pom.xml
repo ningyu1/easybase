@@ -13,6 +13,7 @@
   <name>easybase</name>
   <modules>
     <module>easybase-common</module>
+	<module>easybase-core</module>
     <module>easybase-system</module>
     <module>easybase-generator</module>
   </modules>

@@ -11,7 +11,7 @@
     <groupId>com.easybase</groupId>
     <artifactId>easybase-generator</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1</version>
+    <version>${project.parent.version}</version>
     <name>easybase-generator</name>
     <url>http://maven.apache.org</url>
 
