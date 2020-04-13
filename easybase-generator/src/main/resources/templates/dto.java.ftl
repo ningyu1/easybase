@@ -1,4 +1,4 @@
-package ${package.ModuleName}.dto;
+package ${cfg.DtoPackage};
 
 import ${package.Entity}.${entity};
 import lombok.Data;
