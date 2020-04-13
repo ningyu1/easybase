@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ningyu.position.mapper.PositionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="io.ningyu.position.entity.PositionEntity">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="org" property="org" />
+        <result column="status" property="status" />
+        <result column="description" property="description" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, code, name, sex, org, status, description, create_time, create_user, update_time, update_user, del_flag
+    </sql>
+
+
+    <!-- 分页查询角色列表 -->
+    <select id="selectList" resultType="io.ningyu.position.entity.PositionEntity"
+            parameterType="io.ningyu.position.dto.QueryPosition">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_position
+        WHERE del_flag = 0
+        <if test="param.id != null and param.id != ''">
+            AND id = #{param.id}
+        </if>
+        <if test="param.name != null and param.name != ''">
+            AND `name` like CONCAT('%',#{param.name},'%')
+        </if>
+        <if test="param.code != null and param.code != ''">
+            AND code = #{param.code}
+        </if>
+        <if test="param.status != null and param.status != ''">
+            AND status = #{param.status}
+        </if>
+        <if test="param.startDate != null and param.startDate != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') &gt;= DATE_FORMAT(#{param.startDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="param.endDate != null and param.endDate != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') &lt;= DATE_FORMAT(#{param.endDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        ORDER BY id DESC
+    </select>
+</mapper>

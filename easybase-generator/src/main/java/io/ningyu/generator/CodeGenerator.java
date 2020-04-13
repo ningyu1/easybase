@@ -32,37 +32,64 @@ import java.util.Scanner;
  */
 public class CodeGenerator {
 
+    public static void main(String[] args) {
+        //作者
+        String author = scanner("请输入作者（默认值ningyu）", "ningyu");
+        //表明
+        String[] tables = scanner("请输入表明（多个用逗号分隔）", null).split(",");
+        //表前缀
+        String[] tablePrefix = scanner("请输入表前缀（多个用逗号分隔）", null).split(",");
+        //包名
+        String basePackage = scanner("请输入包名（默认值io.ningyu）", "io.ningyu");
+        //模块名
+        String moduleName = scanner("请输入模块名", null);
+        //代码生成地址
+        String outPutDir = scanner("请输入模块名（默认值./generatorCode）", "./generatorCode");
+        codeGenerate(Generator.builder().author(author).tables(tables).tablePrefix(tablePrefix)
+                .basePackage(basePackage).moduleName(moduleName).outPutDir(outPutDir).build());
+    }
+
     /**
      * <p>
      * 读取控制台内容
      * </p>
      */
-    public static String scanner(String tip) {
+    public static String scanner(String tip, String defaultValue) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder help = new StringBuilder();
         help.append("请输入" + tip + "：");
         System.out.println(help.toString());
-        if (scanner.hasNext()) {
-            String ipt = scanner.next();
+        while (scanner.hasNextLine()) {
+            String ipt = scanner.nextLine();
             if (StringUtils.isNotBlank(ipt)) {
                 return ipt;
+            } else if (StringUtils.isNotBlank(defaultValue)) {
+                return defaultValue;
+            } else {
+                System.out.println("输入不正确！");
             }
         }
-        throw new MybatisPlusException("请输入正确的" + tip + "！");
+        throw new MybatisPlusException("输入不正确！");
     }
 
-    public static void main(String[] args) {
+    /**
+     * <p>
+     * 代码生成
+     * </p>
+     */
+    public static void codeGenerate(Generator generator) {
         //作者
-        String author = "ningyu";
+        String author = generator.getAuthor();
         //表明
-        String[] tables = {"t_sys_user"};
+        String[] tables = generator.getTables();
         //表前缀
-        String[] tablePrefix = {"t_sys_"};
+        String[] tablePrefix = generator.getTablePrefix();
         //包名
-        String basePackage = "io.ningyu";//scanner("包名");
+        String basePackage = generator.getBasePackage();
         //模块名
-        String moduleName = "account";//scanner("模块名");
-        String outPutDir = "./generatorCode";
+        String moduleName = generator.getModuleName();
+        //代码生成地址
+        String outPutDir = generator.getOutPutDir();
 
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
@@ -131,7 +158,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getController() + StringPool.DOT + tableInfo.getControllerName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -142,7 +169,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getEntity() + StringPool.DOT + tableInfo.getEntityName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -154,7 +181,7 @@ public class CodeGenerator {
                 // 自定义输入文件名称
                 String dtoName = "Query" + tableInfo.getEntityName().replaceAll("Entity", "");
                 String path = mpg.getPackageInfo().getParent() + ".dto." + dtoName;
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -165,7 +192,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getMapper() + StringPool.DOT + tableInfo.getMapperName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -185,7 +212,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getService() + StringPool.DOT + tableInfo.getServiceName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -196,7 +223,39 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getServiceImpl() + StringPool.DOT + tableInfo.getServiceImplName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
+                return path;
+            }
+        });
+        //ui.vue
+        focList.add(new FileOutConfig("/templates/ui.vue.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String name= (new StringBuilder()).append(Character.toLowerCase(tableInfo.getEntityName().charAt(0))).append(tableInfo.getEntityName().substring(1)).toString().replace("Entity", "");
+                // 自定义输入文件名St称
+                String path = outPutDir + "/ui/views/system/"+ name +"/" + name + "Table.vue";
+                return path;
+            }
+        });
+        //ui.js
+        focList.add(new FileOutConfig("/templates/ui.js.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String name= (new StringBuilder()).append(Character.toLowerCase(tableInfo.getEntityName().charAt(0))).append(tableInfo.getEntityName().substring(1)).toString().replace("Entity", "");
+                // 自定义输入文件名称
+                String path = outPutDir + "/ui/api/system/"+ name + ".js";
+                return path;
+            }
+        });
+        //ui.lang.js
+        focList.add(new FileOutConfig("/templates/ui.lang.js.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输入文件名称
+                String path = outPutDir + "/ui/lang/zh.js";
                 return path;
             }
         });
