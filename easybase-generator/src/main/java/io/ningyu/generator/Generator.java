@@ -33,7 +33,11 @@ public class Generator {
      */
     String moduleName;
     /**
-     * 代码生成路径
+     * 后端代码路径
      */
-    String outPutDir;
+    String backendOutPutDir;
+    /**
+     * 前端代码路径
+     */
+    String frontendOutPutDir;
 }

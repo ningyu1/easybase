@@ -43,10 +43,13 @@ public class CodeGenerator {
         String basePackage = scanner("请输入包名（默认值io.ningyu）", "io.ningyu");
         //模块名
         String moduleName = scanner("请输入模块名", null);
-        //代码生成地址
-        String outPutDir = scanner("请输入模块名（默认值./generatorCode）", "./generatorCode");
+        //后端代码路径
+        String backendOutPutDir = scanner("请输入后端代码路径（默认值./generatorCode）", "./generatorCode");
+        //前端代码路径
+        String frontendOutPutDir = scanner("请输入前端代码路径（默认值./generatorCode）", "./generatorCode");
         codeGenerate(Generator.builder().author(author).tables(tables).tablePrefix(tablePrefix)
-                .basePackage(basePackage).moduleName(moduleName).outPutDir(outPutDir).build());
+                .basePackage(basePackage).moduleName(moduleName).backendOutPutDir(backendOutPutDir)
+                .frontendOutPutDir(frontendOutPutDir).build());
     }
 
     /**
@@ -88,13 +91,15 @@ public class CodeGenerator {
         String basePackage = generator.getBasePackage();
         //模块名
         String moduleName = generator.getModuleName();
-        //代码生成地址
-        String outPutDir = generator.getOutPutDir();
+        //后端代码路径
+        String backendOutPutDir = generator.getBackendOutPutDir();
+        //后端代码路径
+        String frontendOutPutDir = generator.getFrontendOutPutDir();
 
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
-        mpg.setGlobalConfig(new GlobalConfig().setOutputDir(outPutDir)
+        mpg.setGlobalConfig(new GlobalConfig().setOutputDir(backendOutPutDir)
                 // 作者
                 .setAuthor(author)
                 //生成后打开文件夹
@@ -158,7 +163,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getController() + StringPool.DOT + tableInfo.getControllerName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = backendOutPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -169,7 +174,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getEntity() + StringPool.DOT + tableInfo.getEntityName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = backendOutPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -181,7 +186,7 @@ public class CodeGenerator {
                 // 自定义输入文件名称
                 String dtoName = "Query" + tableInfo.getEntityName().replaceAll("Entity", "");
                 String path = mpg.getPackageInfo().getParent() + ".dto." + dtoName;
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = backendOutPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -192,7 +197,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getMapper() + StringPool.DOT + tableInfo.getMapperName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = backendOutPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -201,7 +206,7 @@ public class CodeGenerator {
 
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return outPutDir + "/src/main/resources/mappers/" + mpg.getPackageInfo().getModuleName() + StringPool.SLASH
+                return backendOutPutDir + "/src/main/resources/mappers/" + mpg.getPackageInfo().getModuleName() + StringPool.SLASH
                         + tableInfo.getXmlName() + StringPool.DOT_XML;
             }
         });
@@ -212,7 +217,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getService() + StringPool.DOT + tableInfo.getServiceName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = backendOutPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -223,7 +228,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getServiceImpl() + StringPool.DOT + tableInfo.getServiceImplName();
                 // 自定义输入文件名称
-                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
+                path = backendOutPutDir + "/src/main/java/" + path.replaceAll("\\.", StringPool.SLASH) + StringPool.DOT_JAVA;
                 return path;
             }
         });
@@ -234,7 +239,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String name= (new StringBuilder()).append(Character.toLowerCase(tableInfo.getEntityName().charAt(0))).append(tableInfo.getEntityName().substring(1)).toString().replace("Entity", "");
                 // 自定义输入文件名St称
-                String path = outPutDir + "/ui/views/system/"+ name +"/" + name + "Table.vue";
+                String path = frontendOutPutDir + "/src/views/system/"+ name +"/" + name + "Table.vue";
                 return path;
             }
         });
@@ -245,7 +250,7 @@ public class CodeGenerator {
             public String outputFile(TableInfo tableInfo) {
                 String name= (new StringBuilder()).append(Character.toLowerCase(tableInfo.getEntityName().charAt(0))).append(tableInfo.getEntityName().substring(1)).toString().replace("Entity", "");
                 // 自定义输入文件名称
-                String path = outPutDir + "/ui/api/system/"+ name + ".js";
+                String path = frontendOutPutDir + "/src/api/system/"+ name + ".js";
                 return path;
             }
         });
@@ -255,7 +260,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                String path = outPutDir + "/ui/lang/zh.js";
+                String path = frontendOutPutDir + "/src/lang/zh1.js";
                 return path;
             }
         });
