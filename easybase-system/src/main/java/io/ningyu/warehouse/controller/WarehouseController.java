@@ -42,7 +42,6 @@ public class WarehouseController {
      * 添加
      */
     @PostMapping("/create")
-    @RequiresRoles("SYSADMIN")
     @ApiOperation(value = "添加")
     @AroundLog(name = "添加")
     public Result<QueryWarehouse> create(@RequestBody QueryWarehouse vo) {
@@ -61,7 +60,6 @@ public class WarehouseController {
      * 修改
      */
     @PostMapping("/update")
-    @RequiresRoles("SYSADMIN")
     @ApiOperation(value = "更新")
     @AroundLog(name = "更新")
     public Result<QueryWarehouse> update(@RequestBody QueryWarehouse vo) {
@@ -79,7 +77,6 @@ public class WarehouseController {
      * 删除
      */
     @PostMapping("/delete/{id}")
-    @RequiresRoles("SYSADMIN")
     @ApiOperation(value = "删除")
     @AroundLog(name = "删除")
     @ApiImplicitParam(paramType = "path", name = "id", value = "id", required = true, dataType = "Integer")
@@ -98,7 +95,6 @@ public class WarehouseController {
      * 批量删除
      */
     @PostMapping("/delete")
-    @RequiresRoles("SYSADMIN")
     @ApiOperation(value = "批量删除")
     @AroundLog(name = "批量删除")
     public Result<?> delete(@RequestBody List<Integer> ids) {
@@ -119,7 +115,7 @@ public class WarehouseController {
     @GetMapping(value = "/get/{id}")
     @ApiOperation(value = "查询详情", notes = "查询详情")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id", required = true, dataType = "Integer")
-    public Result<QueryWarehouse> queryDictList(@PathVariable("id") Integer id) {
+    public Result<QueryWarehouse> get(@PathVariable("id") Integer id) {
         WarehouseEntity entity = warehouseService.getById(id);
         QueryWarehouse vo = new QueryWarehouse();
         if (entity != null) {

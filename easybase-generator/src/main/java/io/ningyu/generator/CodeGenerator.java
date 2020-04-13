@@ -20,7 +20,9 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -53,14 +55,14 @@ public class CodeGenerator {
         //作者
         String author = "ningyu";
         //表明
-        String[] tables = {"t_sys_warehouse"};
+        String[] tables = {"t_sys_user"};
         //表前缀
         String[] tablePrefix = {"t_sys_"};
         //包名
         String basePackage = "io.ningyu";//scanner("包名");
         //模块名
-        String moduleName = "warehouse";//scanner("模块名");
-        String outPutDir = "D://mybatisCode";
+        String moduleName = "account";//scanner("模块名");
+        String outPutDir = "./generatorCode";
 
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
@@ -116,22 +118,97 @@ public class CodeGenerator {
 
             @Override
             public void initMap() {
-                // to do nothing
+                Map<String, Object> map = new HashMap<>();
+                map.put("DtoPackage", mpg.getPackageInfo().getParent() + ".dto");
+                this.setMap(map);
             }
         };
         List<FileOutConfig> focList = new ArrayList<>();
-        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
+        //controller
+        focList.add(new FileOutConfig("/templates/controller.java.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getController() + StringPool.DOT + tableInfo.getControllerName();
+                // 自定义输入文件名称
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                return path;
+            }
+        });
+        //Entity
+        focList.add(new FileOutConfig("/templates/entity.java.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getEntity() + StringPool.DOT + tableInfo.getEntityName();
+                // 自定义输入文件名称
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                return path;
+            }
+        });
+        //dto
+        focList.add(new FileOutConfig("/templates/dto.java.ftl") {
 
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return outPutDir + "/src/main/resources/mappers/" + mpg.getPackageInfo().getModuleName() + "/"
-                        + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                String dtoName = "Query" + tableInfo.getEntityName().replaceAll("Entity", "");
+                String path = mpg.getPackageInfo().getParent() + ".dto." + dtoName;
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                return path;
+            }
+        });
+        //mapper.java
+        focList.add(new FileOutConfig("/templates/mapper.java.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getMapper() + StringPool.DOT + tableInfo.getMapperName();
+                // 自定义输入文件名称
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                return path;
+            }
+        });
+        //mapper.xml
+        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return outPutDir + "/src/main/resources/mappers/" + mpg.getPackageInfo().getModuleName() + StringPool.SLASH
+                        + tableInfo.getXmlName() + StringPool.DOT_XML;
+            }
+        });
+        //service.java
+        focList.add(new FileOutConfig("/templates/service.java.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getService() + StringPool.DOT + tableInfo.getServiceName();
+                // 自定义输入文件名称
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                return path;
+            }
+        });
+        //serviceImpl.java
+        focList.add(new FileOutConfig("/templates/serviceImpl.java.ftl") {
+
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String path = mpg.getPackageInfo().getParent() + StringPool.DOT + mpg.getPackageInfo().getServiceImpl() + StringPool.DOT + tableInfo.getServiceImplName();
+                // 自定义输入文件名称
+                path = outPutDir + "/src/main/java/" + path.replaceAll("\\.",StringPool.SLASH) + StringPool.DOT_JAVA;
+                return path;
             }
         });
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
-        mpg.setTemplate(new TemplateConfig().setXml(null));
+
+        /**
+         * 模板配置
+         */
+        TemplateConfig tc = new TemplateConfig();
+        //关闭自动默认生成，使用上面自定义生成
+        mpg.setTemplate(tc.setXml(null).setController(null).setEntity(null).setService(null).setServiceImpl(null).setMapper(null));
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
