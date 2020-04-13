@@ -92,9 +92,9 @@ public class CodeGenerator {
         //模块名
         String moduleName = generator.getModuleName();
         //后端代码路径
-        String backendOutPutDir = generator.getBackendOutPutDir();
+        String backendOutPutDir = generator.getBackendOutPutDir().endsWith("/") ? generator.getBackendOutPutDir().substring(0, generator.getBackendOutPutDir().length() - 1) : generator.getBackendOutPutDir();
         //后端代码路径
-        String frontendOutPutDir = generator.getFrontendOutPutDir();
+        String frontendOutPutDir = generator.getFrontendOutPutDir().endsWith("/") ? generator.getFrontendOutPutDir().substring(0, generator.getFrontendOutPutDir().length() - 1) : generator.getFrontendOutPutDir();
 
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
