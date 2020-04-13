@@ -132,7 +132,7 @@ public class CodeGenerator {
                 .setDriverName("com.mysql.jdbc.Driver")
                 .setUsername("root")
                 .setPassword("root")
-                .setUrl("jdbc:mysql://127.0.0.1:3306/jeebase?useUnicode=true&characterEncoding=utf8"));
+                .setUrl("jdbc:mysql://127.0.0.1:3306/easybase?useUnicode=true&characterEncoding=utf8"));
 
         // 包配置
         mpg.setPackageInfo(new PackageConfig()
