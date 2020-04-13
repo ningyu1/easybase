@@ -29,7 +29,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1/jeebase?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1/easybase?useUnicode=true&characterEncoding=utf8
     username: root
     password: root
     initialSize: 1

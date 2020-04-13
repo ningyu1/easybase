@@ -72,6 +72,7 @@
         level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。默认是DEBUG可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
     <logger name="org.springframework.web" level="trace"/>
+    <logger name="org.springframework.web.servlet.view.freemarker" level="info"/>
     <logger name="io.ningyu" level="debug"/>
 
     <root level="info">
