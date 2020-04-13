@@ -32,7 +32,7 @@
             AND id = #{warehouse.id}
         </if>
         <if test="warehouse.name != null and warehouse.name != ''">
-            AND name = #{warehouse.name}
+            AND `name` like CONCAT('%',#{warehouse.name},'%')
         </if>
         <if test="warehouse.code != null and warehouse.code != ''">
             AND code = #{warehouse.code}

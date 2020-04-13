@@ -3,7 +3,6 @@ package io.ningyu.warehouse.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.ningyu.common.annotation.auth.NoAuthentication;
 import io.ningyu.common.annotation.log.AroundLog;
 import io.ningyu.common.base.PageResult;
 import io.ningyu.common.base.Result;
@@ -21,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -94,13 +95,28 @@ public class WarehouseController {
     }
 
     /**
+     * 批量删除
+     */
+    @PostMapping("/delete")
+    @RequiresRoles("SYSADMIN")
+    @ApiOperation(value = "批量删除")
+    @AroundLog(name = "批量删除")
+    public Result<?> delete(@RequestBody List<Integer> ids) {
+        boolean result = warehouseService.removeByIds(ids);
+        if (result) {
+            return new Result<>().success("删除成功").put(Boolean.TRUE);
+        } else {
+            return new Result<>().error("删除失败").put(Boolean.FALSE);
+        }
+    }
+
+    /**
      * 通过id获取详情
      *
      * @param id
      * @return
      */
     @GetMapping(value = "/get/{id}")
-//    @NoAuthentication
     @ApiOperation(value = "查询详情", notes = "查询详情")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id", required = true, dataType = "Integer")
     public Result<QueryWarehouse> queryDictList(@PathVariable("id") Integer id) {
@@ -120,7 +136,6 @@ public class WarehouseController {
      * @return
      */
     @GetMapping(value = "/list")
-//    @NoAuthentication
     @ApiOperation(value = "查询列表", notes = "查询列表")
     public PageResult<WarehouseEntity> list(QueryWarehouse vo, Page<WarehouseEntity> page) {
         Page<WarehouseEntity> pageList = warehouseService.selectList(page, vo);
