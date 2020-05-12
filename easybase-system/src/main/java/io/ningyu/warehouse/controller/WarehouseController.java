@@ -133,7 +133,7 @@ public class WarehouseController {
      */
     @GetMapping(value = "/list")
     @ApiOperation(value = "查询列表", notes = "查询列表")
-    public PageResult<WarehouseEntity> list(QueryWarehouse vo, Page<WarehouseEntity> page) {
+    public PageResult<WarehouseEntity> list(QueryWarehouse vo, Page page) {
         Page<WarehouseEntity> pageList = warehouseService.selectList(page, vo);
         PageResult<WarehouseEntity> pageResult = new PageResult<WarehouseEntity>(pageList.getTotal(), pageList.getRecords());
         return pageResult;
