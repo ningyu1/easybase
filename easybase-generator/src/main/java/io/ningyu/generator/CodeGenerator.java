@@ -29,24 +29,34 @@ import java.util.Scanner;
  * <p>
  * 代码生成器演示
  * </p>
+ * @author ningyu
  */
 public class CodeGenerator {
 
+    public static final DbType dbType = DbType.MYSQL;
+    public static final String driverName = "com.mysql.jdbc.Driver";
+    public static final String userName = "root";
+    public static final String password = "root@123456";
+    public static final String url = "jdbc:mysql://192.168.0.43:3310/autogenerate?useUnicode=true&characterEncoding=utf8";
+    public static final String defaultAuthor = "ningyu";
+    public static final String defaultBasePackage = "io.ningyu";
+    public static final String defaultGeneratorOutPutDir = "./generatorCode";
+
     public static void main(String[] args) {
         //作者
-        String author = scanner("请输入作者（默认值ningyu）", "ningyu");
+        String author = scanner("请输入作者（默认值ningyu）", defaultAuthor);
         //表明
         String[] tables = scanner("请输入表明（多个用逗号分隔）", null).split(",");
         //表前缀
         String[] tablePrefix = scanner("请输入表前缀（多个用逗号分隔）", null).split(",");
         //包名
-        String basePackage = scanner("请输入包名（默认值io.ningyu）", "io.ningyu");
+        String basePackage = scanner("请输入包名（默认值io.ningyu）", defaultBasePackage);
         //模块名
         String moduleName = scanner("请输入模块名", null);
         //后端代码路径
-        String backendOutPutDir = scanner("请输入后端代码路径（默认值./generatorCode）", "./generatorCode");
+        String backendOutPutDir = scanner("请输入后端代码路径（默认值./generatorCode）", defaultGeneratorOutPutDir);
         //前端代码路径
-        String frontendOutPutDir = scanner("请输入前端代码路径（默认值./generatorCode）", "./generatorCode");
+        String frontendOutPutDir = scanner("请输入前端代码路径（默认值./generatorCode）", defaultGeneratorOutPutDir);
         codeGenerate(Generator.builder().author(author).tables(tables).tablePrefix(tablePrefix)
                 .basePackage(basePackage).moduleName(moduleName).backendOutPutDir(backendOutPutDir)
                 .frontendOutPutDir(frontendOutPutDir).build());
@@ -128,11 +138,11 @@ public class CodeGenerator {
 
         // 数据源配置
         mpg.setDataSource(new DataSourceConfig()
-                .setDbType(DbType.MYSQL)
-                .setDriverName("com.mysql.jdbc.Driver")
-                .setUsername("root")
-                .setPassword("root")
-                .setUrl("jdbc:mysql://127.0.0.1:3306/easybase?useUnicode=true&characterEncoding=utf8"));
+                .setDbType(dbType)
+                .setDriverName(driverName)
+                .setUsername(userName)
+                .setPassword(password)
+                .setUrl(url));
 
         // 包配置
         mpg.setPackageInfo(new PackageConfig()
